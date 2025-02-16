@@ -7,5 +7,5 @@
 ## # Build ISO
 ##
 
-sudo ./steps.sh "${@}"
-#sudo ./steps.sh "kde"
+#sudo ./steps.sh "${@}"
+sudo ./steps.sh "kde"
