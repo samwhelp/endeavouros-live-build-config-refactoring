@@ -258,7 +258,7 @@ args_var_init () {
 
 	DEFAULT_BUILD_RESPIN="xfce"
 	REF_BUILD_RESPIN="${REF_BUILD_RESPIN:=$DEFAULT_BUILD_RESPIN}"
-	REF_BUILD_RESPIN_OPTION_LIST="xfce lxqt kde-plasms gnome-shell mate cinnamon"
+	REF_BUILD_RESPIN_OPTION_LIST="xfce lxqt kde-plasma gnome-shell mate cinnamon"
 
 
 	##
@@ -596,9 +596,9 @@ msg_usage_body_main () {
 	util_error_echo
 	util_error_echo "Example  : sudo ./${REF_CMD_FILE_NAME} xfce"
 	util_error_echo
-	util_error_echo "Example  : sudo ./${REF_CMD_FILE_NAME} kde"
+	util_error_echo "Example  : sudo ./${REF_CMD_FILE_NAME} kde-plasma"
 	util_error_echo
-	util_error_echo "Example  : sudo ./${REF_CMD_FILE_NAME} gnome"
+	util_error_echo "Example  : sudo ./${REF_CMD_FILE_NAME} gnome-shell"
 
 
 	return 0
