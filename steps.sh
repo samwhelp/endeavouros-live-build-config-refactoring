@@ -337,6 +337,19 @@ args_var_dump
 
 master_var_init () {
 
+
+	##
+	## ## Master / Base Path
+	##
+
+	REF_MASTER_COMMON_SOURCE_DIR_NAME="common"
+	REF_MASTER_COMMON_SOURCE_DIR_PATH="${REF_MAIN_BASE_SOURCE_DIR_PATH}/${REF_MASTER_COMMON_SOURCE_DIR_NAME}"
+
+
+	REF_MASTER_VARIANT_SOURCE_DIR_NAME="variant"
+	REF_MASTER_VARIANT_SOURCE_DIR_PATH="${REF_MAIN_BASE_SOURCE_DIR_PATH}/${REF_MASTER_VARIANT_SOURCE_DIR_NAME}"
+
+
 	return 0
 }
 
@@ -347,6 +360,23 @@ master_var_dump () {
 	util_debug_echo "##"
 	util_debug_echo "## ## Dump / master_var_dump"
 	util_debug_echo "##"
+
+
+
+
+	##
+	## ## Master / Base Path
+	##
+
+	util_debug_echo
+	util_debug_echo "REF_MASTER_COMMON_SOURCE_DIR_NAME=${REF_MASTER_COMMON_SOURCE_DIR_NAME}"
+	util_debug_echo "REF_MASTER_COMMON_SOURCE_DIR_PATH=${REF_MASTER_COMMON_SOURCE_DIR_PATH}"
+
+
+	util_debug_echo
+	util_debug_echo "REF_MASTER_VARIANT_SOURCE_DIR_NAME=${REF_MASTER_VARIANT_SOURCE_DIR_NAME}"
+	util_debug_echo "REF_MASTER_VARIANT_SOURCE_DIR_PATH=${REF_MASTER_VARIANT_SOURCE_DIR_PATH}"
+
 
 
 
