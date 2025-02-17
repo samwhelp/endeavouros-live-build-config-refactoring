@@ -835,8 +835,6 @@ endeavouros_build_iso_overlay () {
 	util_error_echo
 
 
-	return 0
-
 	endeavouros_factory_build_config_overlay
 
 	endeavouros_factory_master_os_file_overlay
@@ -1014,7 +1012,7 @@ endeavouros_master_os_file_final_adjust () {
 
 
 	util_error_echo
-	util_error_echo rm -f "${target_dir_path}/root/endeavouros-skel-liveuser/src/etc/skel/.bash_profile"
+	util_error_echo rm -f "${target_dir_path}/root/endeavouros-skel-liveuser/src/etc/skel/.nanorc"
 	util_error_echo
 	rm -f "${target_dir_path}/root/endeavouros-skel-liveuser/src/etc/skel/.nanorc"
 
@@ -1444,19 +1442,19 @@ endeavouros_build_iso_create () {
 	##
 	## ## prepare
 	##
-	#endeavouros_build_iso_prepare
+	endeavouros_build_iso_prepare
 
 
 	##
 	## ## overlay
 	##
-	#endeavouros_build_iso_overlay
+	endeavouros_build_iso_overlay
 
 
 	##
 	## ## create iso
 	##
-	#endeavouros_build_iso_archive
+	endeavouros_build_iso_archive
 
 
 	return 0
