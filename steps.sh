@@ -473,6 +473,43 @@ model_var_dump () {
 
 
 
+
+##
+## ## Model / Util
+##
+
+util_dir_file_overlay () {
+
+
+	local source_dir_path="${1}"
+	local target_dir_path="${2}"
+
+
+	util_error_echo
+	util_error_echo mkdir -p "${source_dir_path}"
+	mkdir -p "${source_dir_path}"
+
+
+	util_error_echo
+	util_error_echo mkdir -p "${target_dir_path}"
+	mkdir -p "${target_dir_path}"
+
+
+	util_error_echo
+	util_error_echo cp -rfT "${source_dir_path}" "${target_dir_path}"
+	cp -rfT "${source_dir_path}" "${target_dir_path}"
+
+
+	return 0
+}
+
+
+
+
+
+
+
+
 ##
 ## ## Model / Run / Default
 ##
