@@ -621,6 +621,43 @@ endeavouros_build_iso_prepare_port_dir () {
 endeavouros_build_iso_prepare_port_profile () {
 
 
+	util_error_echo
+	util_error_echo "##"
+	util_error_echo "## ## Endeavouros / Build ISO / Prepare / Port Profile"
+	util_error_echo "##"
+	util_error_echo
+
+
+	endeavouros_build_iso_prepare_port_profile_common
+
+	endeavouros_build_iso_prepare_port_profile_respin
+
+
+	return 0
+}
+
+endeavouros_build_iso_prepare_port_profile_common () {
+
+
+	local source_dir_path="${REF_MASTER_COMMON_SOURCE_DIR_PATH}"
+	local target_dir_path="${REF_MASTER_PORT_DIR_PATH}"
+
+
+	util_dir_file_overlay "${source_dir_path}" "${target_dir_path}"
+
+
+	return 0
+}
+
+endeavouros_build_iso_prepare_port_profile_respin () {
+
+
+	local source_dir_path="${REF_MASTER_RESPIN_SOURCE_DIR_PATH}"
+	local target_dir_path="${REF_MASTER_PORT_DIR_PATH}"
+
+
+	util_dir_file_overlay "${source_dir_path}" "${target_dir_path}"
+
 
 	return 0
 }
