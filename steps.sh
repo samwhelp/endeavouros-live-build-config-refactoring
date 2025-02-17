@@ -1028,7 +1028,7 @@ endeavouros_build_iso_create () {
 	##
 	## ## create iso
 	##
-	endeavouros_build_iso_archive
+	#endeavouros_build_iso_archive
 
 
 	return 0
