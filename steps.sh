@@ -563,10 +563,10 @@ endeavouros_build_iso_steps () {
 
 
 
-	endeavouros_build_iso_package_required
+	#endeavouros_build_iso_package_required
 
 
-	endeavouros_build_iso_create
+	#endeavouros_build_iso_create
 
 
 	return 0
