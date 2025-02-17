@@ -16,13 +16,13 @@
 ## run
 ##
 ## ``` sh
-## IS_DEBUG=true ./skel.sh xfce
+## sudo IS_DEBUG=true ./skel.sh xfce
 ## ```
 ##
 ## run
 ##
 ## ``` sh
-## REF_MAIN_RUN=test IS_DEBUG=true ./skel.sh xfce
+## sudo REF_MAIN_RUN=test IS_DEBUG=true ./skel.sh xfce
 ## ```
 ##
 
