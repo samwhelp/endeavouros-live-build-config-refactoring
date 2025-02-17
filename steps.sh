@@ -1389,6 +1389,17 @@ endeavouros_build_iso_archive () {
 	cd "${iso_profile_dir_path}"
 
 
+
+
+	##
+	## ## iso build prepare
+	##
+	util_error_echo
+	util_error_echo ./prepare.sh
+	util_error_echo
+	./prepare.sh
+
+
 	##
 	## ## iso build start
 	##
