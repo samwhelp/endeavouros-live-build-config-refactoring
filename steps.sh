@@ -635,6 +635,169 @@ endeavouros_build_iso_overlay () {
 
 
 
+##
+## ## Endeavouros / Build ISO / Overlay / Build Config
+##
+
+endeavouros_factory_build_config_overlay () {
+
+
+	local source_dir_path="${REF_SOURCE_FACTORY_BUILD_DIR_PATH}"
+	local target_dir_path="${REF_TARGET_FACTORY_BUILD_DIR_PATH}"
+
+
+	util_error_echo
+	util_error_echo "##"
+	util_error_echo "## ## Endeavouros / Build ISO / Overlay / Build Config"
+	util_error_echo "##"
+	util_error_echo
+
+
+	util_dir_file_overlay "${source_dir_path}" "${target_dir_path}"
+
+
+	return 0
+}
+
+
+
+
+##
+## ## Endeavouros / Build ISO / Overlay / Factory Master OS File
+##
+
+endeavouros_factory_master_os_file_overlay () {
+
+
+	local source_dir_path="${REF_SOURCE_FACTORY_OVERLAY_MASTER_OS_DIR_PATH}"
+	local target_dir_path="${REF_TARGET_FACTORY_OVERLAY_MASTER_OS_DIR_PATH}"
+
+
+	util_error_echo
+	util_error_echo "##"
+	util_error_echo "## ## Endeavouros / Build ISO / Overlay / Factory Master OS File"
+	util_error_echo "##"
+	util_error_echo
+
+
+	util_dir_file_overlay "${source_dir_path}" "${target_dir_path}"
+
+
+	return 0
+}
+
+
+
+
+##
+## ## Endeavouros / Build ISO / Overlay / Master OS File
+##
+
+endeavouros_master_os_file_overlay () {
+
+
+	local source_dir_path="${REF_SOURCE_OVERLAY_MASTER_OS_DIR_PATH}"
+	local target_dir_path="${REF_TARGET_OVERLAY_MASTER_OS_DIR_PATH}"
+
+
+	util_error_echo
+	util_error_echo "##"
+	util_error_echo "## ## Endeavouros / Build ISO / Overlay / Master OS File"
+	util_error_echo "##"
+	util_error_echo
+
+
+	util_dir_file_overlay "${source_dir_path}" "${target_dir_path}"
+
+
+	return 0
+}
+
+
+
+
+##
+## ## Endeavouros / Build ISO / Overlay / Package Install List
+##
+
+endeavouros_master_os_package_overlay () {
+
+
+	local source_file_path="${REF_SOURCE_OVERLAY_MASTER_PACKAGE_INSTALL_FILE_PATH}"
+	local target_file_path="${REF_TARGET_OVERLAY_MASTER_PACKAGE_INSTALL_FILE_PATH}"
+
+
+	util_error_echo
+	util_error_echo "##"
+	util_error_echo "## ## Endeavouros / Build ISO / Overlay / Package Install List"
+	util_error_echo "##"
+	util_error_echo
+
+
+	##
+	## ## Check Exist
+	##
+
+	if grep '## ## Endeavouros Adjustment / Package Install ##' "${target_file_path}" > /dev/null; then
+
+		return 0
+
+	fi
+
+
+
+	##
+	## ## Append
+	##
+
+	util_error_echo
+	util_error_echo cat "${source_file_path}" '"append to"' "${target_file_path}"
+	util_error_echo
+	cat "${source_file_path}" >> "${target_file_path}"
+
+
+	return 0
+}
+
+
+
+
+##
+## ## Endeavouros / Build ISO / Overlay / Final Adjust
+##
+
+endeavouros_master_os_file_final_adjust () {
+
+
+	local source_dir_path="${REF_SOURCE_OVERLAY_MASTER_OS_DIR_PATH}"
+	local target_dir_path="${REF_TARGET_OVERLAY_MASTER_OS_DIR_PATH}"
+
+
+	util_error_echo
+	util_error_echo "##"
+	util_error_echo "## ## Endeavouros / Build ISO / Overlay / Final Adjust"
+	util_error_echo "##"
+	util_error_echo
+
+
+	util_error_echo
+	util_error_echo rm -f "${target_dir_path}/root/endeavouros-skel-liveuser/src/etc/skel/.bash_profile"
+	util_error_echo
+	rm -f "${target_dir_path}/root/endeavouros-skel-liveuser/src/etc/skel/.bash_profile"
+
+
+	util_error_echo
+	util_error_echo rm -f "${target_dir_path}/root/endeavouros-skel-liveuser/src/etc/skel/.bash_profile"
+	util_error_echo
+	rm -f "${target_dir_path}/root/endeavouros-skel-liveuser/src/etc/skel/.nanorc"
+
+
+
+	return 0
+}
+
+
+
 
 
 
