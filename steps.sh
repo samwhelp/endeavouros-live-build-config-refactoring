@@ -510,6 +510,76 @@ util_dir_file_overlay () {
 
 
 
+
+
+
+
+
+
+##
+## ## Endeavouros / Build ISO / Steps
+##
+
+endeavouros_build_iso_develop_test () {
+
+
+	util_error_echo
+	util_error_echo "##"
+	util_error_echo "## ## Run / endeavouros_build_iso_develop_test"
+	util_error_echo "##"
+	util_error_echo
+
+
+
+	endeavouros_build_iso_develop_test_prototype
+
+}
+
+endeavouros_build_iso_develop_test_prototype () {
+
+	util_error_echo
+	util_error_echo "##"
+	util_error_echo "## ## Run / endeavouros_build_iso_develop_test_prototype"
+	util_error_echo "##"
+	util_error_echo
+
+
+
+
+
+
+	return 0
+}
+
+
+endeavouros_build_iso_steps () {
+
+
+	util_error_echo
+	util_error_echo "##"
+	util_error_echo "## ## Run / endeavouros_build_iso_steps"
+	util_error_echo "##"
+	util_error_echo
+
+
+
+	endeavouros_build_iso_package_required
+
+
+	endeavouros_build_iso_create
+
+
+	return 0
+}
+
+
+
+
+
+
+
+
+
 ##
 ## ## Model / Run / Default
 ##
@@ -520,6 +590,10 @@ model_run_default () {
 	util_error_echo "##"
 	util_error_echo "## ## Model / Run / Default"
 	util_error_echo "##"
+
+
+	endeavouros_build_iso_steps
+
 
 	return 0
 }
@@ -535,6 +609,10 @@ model_run_test () {
 	util_error_echo "##"
 	util_error_echo "## ## Model / Run / Test"
 	util_error_echo "##"
+
+
+	endeavouros_build_iso_develop_test
+
 
 	return 0
 }
