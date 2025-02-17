@@ -368,6 +368,16 @@ master_var_init () {
 
 
 
+	##
+	## ## Master / Base Path / Port
+	##
+
+	REF_MASTER_PORT_DIR_NAME="port"
+	REF_MASTER_PORT_DIR_PATH="${REF_MAIN_BASE_TARGET_DIR_PATH}/${REF_MASTER_PORT_DIR_NAME}"
+
+
+
+
 	return 0
 }
 
@@ -411,6 +421,16 @@ master_var_dump () {
 	util_debug_echo "REF_MASTER_WORK_TARGET_DIR_NAME=${REF_MASTER_WORK_TARGET_DIR_NAME}"
 	util_debug_echo "REF_MASTER_WORK_TARGET_DIR_PATH=${REF_MASTER_WORK_TARGET_DIR_PATH}"
 
+
+
+
+	##
+	## ## Master / Base Path / Port
+	##
+
+	util_debug_echo
+	util_debug_echo "REF_MASTER_PORT_DIR_NAME=${REF_MASTER_PORT_DIR_NAME}"
+	util_debug_echo "REF_MASTER_PORT_DIR_PATH=${REF_MASTER_PORT_DIR_PATH}"
 
 
 
