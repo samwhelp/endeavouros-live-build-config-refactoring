@@ -899,12 +899,6 @@ _main_init_args_ () {
 	args_var_dump
 
 
-	##
-	## ## Model / Variable / Init
-	##
-
-	model_var_init
-	model_var_dump
 
 
 	##
@@ -914,6 +908,15 @@ _main_init_args_ () {
 	master_var_init
 	master_var_dump
 
+
+
+
+	##
+	## ## Model / Variable / Init
+	##
+
+	model_var_init
+	model_var_dump
 
 
 

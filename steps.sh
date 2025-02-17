@@ -455,6 +455,23 @@ master_var_dump () {
 
 model_var_init () {
 
+
+
+
+	##
+	## ## ISO Profile / Path
+	##
+
+	REF_ISO_PROFILE_DIR_PATH="${REF_MASTER_PROJECT_TARGET_DIR_PATH}"
+
+	REF_ISO_PROFILE_REPO_GIT_URL="https://github.com/endeavouros-team/EndeavourOS-ISO.git"
+
+	#REF_ISO_PROFILE_REPO_ARCHIVE_URL="https://github.com/endeavouros-team/EndeavourOS-ISO/archive/refs/heads/main.zip"
+	REF_ISO_PROFILE_REPO_ARCHIVE_URL="https://github.com/endeavouros-team/EndeavourOS-ISO/archive/refs/heads/main.tar.gz"
+
+
+
+
 	return 0
 }
 
@@ -465,6 +482,20 @@ model_var_dump () {
 	util_debug_echo "##"
 	util_debug_echo "## ## Dump / model_var_dump"
 	util_debug_echo "##"
+
+
+
+
+
+	##
+	## ## Model / Base Path / ISO Profile
+	##
+
+	util_debug_echo
+	util_debug_echo "REF_ISO_PROFILE_DIR_PATH=${REF_ISO_PROFILE_DIR_PATH}"
+	util_debug_echo "REF_ISO_PROFILE_REPO_GIT_URL=${REF_ISO_PROFILE_REPO_GIT_URL}"
+	util_debug_echo "REF_ISO_PROFILE_REPO_ARCHIVE_URL=${REF_ISO_PROFILE_REPO_ARCHIVE_URL}"
+
 
 
 
@@ -569,9 +600,9 @@ endeavouros_build_iso_prepare () {
 
 
 
-	#endeavouros_build_iso_prepare_work_dir
+	endeavouros_build_iso_prepare_work_dir
 
-	#endeavouros_build_iso_prepare_iso_profile
+	endeavouros_build_iso_prepare_iso_profile
 
 
 
@@ -671,10 +702,15 @@ endeavouros_build_iso_prepare_port_profile_respin () {
 
 endeavouros_build_iso_prepare_work_dir () {
 
-	local work_dir_path="${REF_PLAN_WORK_DIR_PATH}"
+	local work_dir_path="${REF_MASTER_WORK_TARGET_DIR_PATH}"
 
 
 	if [[ -d "${work_dir_path}" ]]; then
+
+		#util_error_echo
+		#util_error_echo rm -rf "${work_dir_path}"
+		#util_error_echo
+		#rm -rf "${work_dir_path}"
 
 		return 0
 
@@ -682,15 +718,9 @@ endeavouros_build_iso_prepare_work_dir () {
 
 
 	util_error_echo
-	util_error_echo sudo mkdir -p "${work_dir_path}"
+	util_error_echo mkdir -p "${work_dir_path}"
 	util_error_echo
-	sudo mkdir -p "${work_dir_path}"
-
-
-	util_error_echo
-	util_error_echo sudo chmod 777 "${work_dir_path}"
-	util_error_echo
-	sudo chmod 777 "${work_dir_path}"
+	mkdir -p "${work_dir_path}"
 
 
 	return 0
@@ -705,9 +735,18 @@ endeavouros_build_iso_prepare_work_dir () {
 
 endeavouros_build_iso_prepare_iso_profile () {
 
+
+	util_error_echo
+	util_error_echo "##"
+	util_error_echo "## ## Endeavouros / Build ISO / Prepare / ISO Profile"
+	util_error_echo "##"
+	util_error_echo
+
+
 	#endeavouros_build_iso_prepare_iso_profile_by_git_clone
 
 	endeavouros_build_iso_prepare_iso_profile_by_download_archive
+
 
 	return 0
 }
@@ -746,7 +785,7 @@ endeavouros_build_iso_prepare_iso_profile_by_download_archive () {
 
 	local iso_profile_repo_archive_url="${REF_ISO_PROFILE_REPO_ARCHIVE_URL}"
 	local iso_profile_dir_path="${REF_ISO_PROFILE_DIR_PATH}"
-	local work_dir_path="${REF_PLAN_WORK_DIR_PATH}"
+	local work_dir_path="${REF_MASTER_WORK_TARGET_DIR_PATH}"
 	local archive_save_file_path="${work_dir_path}/main.tar.gz"
 	local archive_extract_dir_path="${work_dir_path}/EndeavourOS-ISO-main"
 
@@ -1487,12 +1526,6 @@ _main_init_args_ () {
 	args_var_dump
 
 
-	##
-	## ## Model / Variable / Init
-	##
-
-	model_var_init
-	model_var_dump
 
 
 	##
@@ -1502,6 +1535,15 @@ _main_init_args_ () {
 	master_var_init
 	master_var_dump
 
+
+
+
+	##
+	## ## Model / Variable / Init
+	##
+
+	model_var_init
+	model_var_dump
 
 
 
