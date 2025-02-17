@@ -338,8 +338,10 @@ args_var_dump
 master_var_init () {
 
 
+
+
 	##
-	## ## Master / Base Path
+	## ## Master / Base Path / Source
 	##
 
 	REF_MASTER_COMMON_SOURCE_DIR_NAME="common"
@@ -352,6 +354,17 @@ master_var_init () {
 
 	REF_MASTER_RESPIN_SOURCE_DIR_NAME="${REF_BUILD_RESPIN}"
 	REF_MASTER_RESPIN_SOURCE_DIR_PATH="${REF_MASTER_VARIANT_SOURCE_DIR_PATH}/${REF_MASTER_RESPIN_SOURCE_DIR_NAME}"
+
+
+
+
+	##
+	## ## Master / Base Path / Target
+	##
+
+	REF_MASTER_WORK_TARGET_DIR_NAME="work"
+	REF_MASTER_WORK_TARGET_DIR_PATH="${REF_MAIN_BASE_TARGET_DIR_PATH}/${REF_MASTER_WORK_TARGET_DIR_NAME}"
+
 
 
 
@@ -370,7 +383,7 @@ master_var_dump () {
 
 
 	##
-	## ## Master / Base Path
+	## ## Master / Base Path / Source
 	##
 
 	util_debug_echo
@@ -386,6 +399,18 @@ master_var_dump () {
 	util_debug_echo
 	util_debug_echo "REF_MASTER_RESPIN_SOURCE_DIR_NAME=${REF_MASTER_RESPIN_SOURCE_DIR_NAME}"
 	util_debug_echo "REF_MASTER_RESPIN_SOURCE_DIR_PATH=${REF_MASTER_RESPIN_SOURCE_DIR_PATH}"
+
+
+
+
+	##
+	## ## Master / Base Path / Target
+	##
+
+	util_debug_echo
+	util_debug_echo "REF_MASTER_WORK_TARGET_DIR_NAME=${REF_MASTER_WORK_TARGET_DIR_NAME}"
+	util_debug_echo "REF_MASTER_WORK_TARGET_DIR_PATH=${REF_MASTER_WORK_TARGET_DIR_PATH}"
+
 
 
 
