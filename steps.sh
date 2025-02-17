@@ -516,6 +516,387 @@ util_dir_file_overlay () {
 
 
 
+
+
+##
+## ## Endeavouros / Build ISO / Package Required For Build
+##
+
+endeavouros_build_iso_package_required () {
+
+	#return 0
+
+	util_error_echo
+	util_error_echo "##"
+	util_error_echo "## ## Check Package Required"
+	util_error_echo "##"
+	util_error_echo
+
+
+	util_error_echo
+	util_error_echo pacman -S --needed --noconfirm archiso mkinitcpio-archiso base-devel
+	util_error_echo
+	pacman -S --needed --noconfirm archiso mkinitcpio-archiso base-devel
+
+	util_error_echo
+
+
+
+}
+
+
+
+
+##
+## ## Endeavouros / Build ISO / Prepare
+##
+
+endeavouros_build_iso_prepare () {
+
+
+	util_error_echo
+	util_error_echo "##"
+	util_error_echo "## ## Endeavouros / Build ISO / Prepare"
+	util_error_echo "##"
+	util_error_echo
+
+
+
+
+	endeavouros_build_iso_prepare_port_dir
+
+	endeavouros_build_iso_prepare_port_profile
+
+
+
+	#endeavouros_build_iso_prepare_work_dir
+
+	#endeavouros_build_iso_prepare_iso_profile
+
+
+
+
+	return 0
+}
+
+
+##
+## ## Endeavouros / Build ISO / Prepare / Port Dir
+##
+
+endeavouros_build_iso_prepare_port_dir () {
+
+
+	local port_dir_path="${REF_MASTER_PORT_DIR_PATH}"
+
+
+	if [[ -d "${port_dir_path}" ]]; then
+
+		util_error_echo
+		util_error_echo rm -rf "${port_dir_path}"
+		util_error_echo
+		rm -rf "${port_dir_path}"
+
+		return 0
+
+	fi
+
+
+	util_error_echo
+	util_error_echo mkdir -p "${port_dir_path}"
+	util_error_echo
+	mkdir -p "${port_dir_path}"
+
+
+	return 0
+}
+
+
+
+
+##
+## ## Endeavouros / Build ISO / Prepare / Port Profile
+##
+
+endeavouros_build_iso_prepare_port_profile () {
+
+
+
+	return 0
+}
+
+
+
+
+##
+## ## Endeavouros / Build ISO / Prepare / Work Dir
+##
+
+endeavouros_build_iso_prepare_work_dir () {
+
+	local work_dir_path="${REF_PLAN_WORK_DIR_PATH}"
+
+
+	if [[ -d "${work_dir_path}" ]]; then
+
+		return 0
+
+	fi
+
+
+	util_error_echo
+	util_error_echo sudo mkdir -p "${work_dir_path}"
+	util_error_echo
+	sudo mkdir -p "${work_dir_path}"
+
+
+	util_error_echo
+	util_error_echo sudo chmod 777 "${work_dir_path}"
+	util_error_echo
+	sudo chmod 777 "${work_dir_path}"
+
+
+	return 0
+}
+
+
+
+
+##
+## ## Endeavouros / Build ISO / Prepare / ISO Profile
+##
+
+endeavouros_build_iso_prepare_iso_profile () {
+
+	#endeavouros_build_iso_prepare_iso_profile_by_git_clone
+
+	endeavouros_build_iso_prepare_iso_profile_by_download_archive
+
+	return 0
+}
+
+endeavouros_build_iso_prepare_iso_profile_by_git_clone () {
+
+	local iso_profile_repo_git_url="${REF_ISO_PROFILE_REPO_GIT_URL}"
+	local iso_profile_dir_path="${REF_ISO_PROFILE_DIR_PATH}"
+
+
+	if [[ -d "${iso_profile_dir_path}" ]]; then
+
+		#return 0 ## for codeing
+
+
+		util_error_echo
+		util_error_echo rm -rf "${iso_profile_dir_path}"
+		util_error_echo
+		rm -rf "${iso_profile_dir_path}"
+
+
+
+	fi
+
+
+	util_error_echo
+	util_error_echo git clone "${iso_profile_repo_git_url}" "${iso_profile_dir_path}"
+	util_error_echo
+	git clone "${iso_profile_repo_git_url}" "${iso_profile_dir_path}"
+
+
+	return 0
+}
+
+endeavouros_build_iso_prepare_iso_profile_by_download_archive () {
+
+	local iso_profile_repo_archive_url="${REF_ISO_PROFILE_REPO_ARCHIVE_URL}"
+	local iso_profile_dir_path="${REF_ISO_PROFILE_DIR_PATH}"
+	local work_dir_path="${REF_PLAN_WORK_DIR_PATH}"
+	local archive_save_file_path="${work_dir_path}/main.tar.gz"
+	local archive_extract_dir_path="${work_dir_path}/EndeavourOS-ISO-main"
+
+
+
+
+	##
+	## ## Clean Old
+	##
+
+	if [[ -d "${iso_profile_dir_path}" ]]; then
+
+		#return 0 ## for codeing
+
+
+		util_error_echo
+		util_error_echo rm -rf "${iso_profile_dir_path}"
+		util_error_echo
+		rm -rf "${iso_profile_dir_path}"
+
+
+	fi
+
+
+	if [[ -d "${archive_extract_dir_path}" ]]; then
+
+		util_error_echo
+		util_error_echo rm -rf "${archive_extract_dir_path}"
+		util_error_echo
+		rm -rf "${archive_extract_dir_path}"
+
+	fi
+
+
+	if [[ -e "${archive_save_file_path}" ]]; then
+
+		util_error_echo
+		util_error_echo rm -f "${archive_save_file_path}"
+		util_error_echo
+		rm -f "${archive_save_file_path}"
+
+	fi
+
+
+
+
+	##
+	## ## Download
+	##
+
+	util_error_echo
+	util_error_echo wget -c "${iso_profile_repo_archive_url}" -O "${archive_save_file_path}"
+	util_error_echo
+	wget -c "${iso_profile_repo_archive_url}" -O "${archive_save_file_path}"
+
+
+
+
+	##
+	## ## Extract
+	##
+
+	util_error_echo
+	util_error_echo tar -C "${work_dir_path}" -xf "${archive_save_file_path}"
+	util_error_echo
+	tar -C "${work_dir_path}" -xf "${archive_save_file_path}"
+
+
+
+
+	##
+	## ## Final
+	##
+
+	util_error_echo
+	util_error_echo mv "${archive_extract_dir_path}" "${iso_profile_dir_path}"
+	util_error_echo
+	mv "${archive_extract_dir_path}" "${iso_profile_dir_path}"
+
+
+
+
+	return 0
+}
+
+
+
+##
+## ## Endeavouros / Build ISO / Archive
+##
+
+endeavouros_build_iso_archive () {
+
+
+	util_error_echo
+	util_error_echo "##"
+	util_error_echo "## ## Endeavouros / Build ISO / Archive / Start"
+	util_error_echo "##"
+	util_error_echo
+
+
+	local iso_profile_dir_path="${REF_ISO_PROFILE_DIR_PATH}"
+
+
+
+	##
+	## ## iso build head
+	##
+	util_error_echo
+	util_error_echo cd "${iso_profile_dir_path}"
+	cd "${iso_profile_dir_path}"
+
+
+	##
+	## ## iso build prepare
+	##
+	util_error_echo
+	util_error_echo ./prepare.sh
+	util_error_echo
+	./prepare.sh
+
+
+
+	##
+	## ## iso build tail
+	##
+	util_error_echo
+	util_error_echo "cd ${OLDPWD}"
+	cd "${OLDPWD}"
+
+
+
+
+	util_error_echo
+	util_error_echo "##"
+	util_error_echo "## ## Endeavouros / Build ISO / Archive / Done"
+	util_error_echo "##"
+	util_error_echo
+
+
+	return 0
+}
+
+
+
+
+##
+## ## Endeavouros / Build ISO / Create
+##
+
+endeavouros_build_iso_create () {
+
+	util_error_echo
+	util_error_echo "##"
+	util_error_echo "## ## Endeavouros / Build ISO / Create"
+	util_error_echo "##"
+	util_error_echo
+
+
+	##
+	## ## prepare
+	##
+	endeavouros_build_iso_prepare
+
+
+	##
+	## ## overlay
+	##
+	#endeavouros_build_iso_overlay
+
+
+	##
+	## ## create iso
+	##
+	#endeavouros_build_iso_archive
+
+
+	return 0
+}
+
+
+
+
+
+
+
+
 ##
 ## ## Endeavouros / Build ISO / Steps
 ##
@@ -566,7 +947,7 @@ endeavouros_build_iso_steps () {
 	#endeavouros_build_iso_package_required
 
 
-	#endeavouros_build_iso_create
+	endeavouros_build_iso_create
 
 
 	return 0
