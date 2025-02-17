@@ -72,6 +72,23 @@ is_not_debug () {
 }
 
 
+run_and_log () {
+	## From: https://gitlab.com/kalilinux/build-scripts/kali-live/-/blob/main/build.sh?ref_type=heads#L69-L81
+	##if [ -n "${IS_VERBOSE}" ] || [ -n "${IS_DEBUG}" ]; then
+	if [[ "${IS_VERBOSE}" == "true" ]] || [[ "${IS_DEBUG}" == "true" ]]; then
+		printf "RUNNING:" >&2
+		for _ in "$@"; do
+			[[ $_ =~ [[:space:]] ]] && printf " '%s'" "$_" || printf " %s" "$_"
+		done >&2
+		printf "\n" >&2
+		"$@" 2>&1 | tee -a "${REF_BUILD_LOG_FILE_PATH}"
+	else
+		"$@" >>"${REF_BUILD_LOG_FILE_PATH}" 2>&1
+	fi
+	return ${?}
+}
+
+
 
 
 ##
@@ -79,6 +96,7 @@ is_not_debug () {
 ##
 
 base_var_init () {
+
 
 	return 0
 }
@@ -112,6 +130,8 @@ base_var_dump () {
 	util_debug_echo "IS_DEBUG=${IS_DEBUG}"
 
 
+
+
 	return 0
 }
 
@@ -143,6 +163,22 @@ plan_var_init () {
 	REF_PLAN_BASE_TARGET_DIR_PATH="/opt/tmp"
 
 
+
+
+	##
+	## ## Plan / Log Path
+	##
+
+	DEFAULT_IS_VERBOSE="true"
+	IS_VERBOSE="${IS_VERBOSE:=$DEFAULT_IS_VERBOSE}"
+
+
+	REF_BUILD_LOG_FILE_NAME="build.log"
+	REF_BUILD_LOG_FILE_PATH="${REF_PLAN_DIR_PATH}/${REF_BUILD_LOG_FILE_NAME}"
+
+
+
+
 	return 0
 }
 
@@ -170,6 +206,23 @@ plan_var_dump () {
 	util_debug_echo
 	util_debug_echo "REF_PLAN_BASE_SOURCE_DIR_PATH=${REF_PLAN_BASE_SOURCE_DIR_PATH}"
 	util_debug_echo "REF_PLAN_BASE_TARGET_DIR_PATH=${REF_PLAN_BASE_TARGET_DIR_PATH}"
+
+
+
+
+	##
+	## ## Plan / Log Path
+	##
+
+	util_debug_echo
+	util_debug_echo "DEFAULT_IS_VERBOSE=${DEFAULT_IS_VERBOSE}"
+	util_debug_echo "IS_VERBOSE=${IS_VERBOSE}"
+
+	util_debug_echo
+	util_debug_echo "REF_BUILD_LOG_FILE_NAME=${REF_BUILD_LOG_FILE_NAME}"
+	util_debug_echo "REF_BUILD_LOG_FILE_PATH=${REF_BUILD_LOG_FILE_PATH}"
+
+
 
 
 	return 0
@@ -873,6 +926,8 @@ endeavouros_build_iso_prepare_iso_profile_by_download_archive () {
 
 
 
+
+
 ##
 ## ## Endeavouros / Build ISO / Archive
 ##
@@ -889,6 +944,15 @@ endeavouros_build_iso_archive () {
 
 	local iso_profile_dir_path="${REF_ISO_PROFILE_DIR_PATH}"
 
+	local build_arch="${REF_BUILD_ARCH}"
+	local build_respin="${REF_BUILD_RESPIN}"
+	local build_agent_args='-v .'
+	local build_agent_file_name="mkarchiso"
+	local build_agent="./${build_agent_file_name}"
+	local build_agent_file_path="${iso_profile_dir_path}/${build_agent_file_name}"
+
+
+
 
 
 	##
@@ -900,12 +964,16 @@ endeavouros_build_iso_archive () {
 
 
 	##
-	## ## iso build prepare
+	## ## iso build start
 	##
 	util_error_echo
-	util_error_echo ./prepare.sh
+	util_error_echo "${build_agent} ${build_agent_args}"
 	util_error_echo
-	./prepare.sh
+	#"${build_agent}" ${build_agent_args} 2>&1 | tee "eosiso_$(date -u +'%Y.%m.%d-%H:%M').log"
+	#./mkarchiso -v "." 2>&1 | tee "eosiso_$(date -u +'%Y.%m.%d-%H:%M').log"
+	"${build_agent}" ${build_agent_args}
+	#run_and_log ${build_agent} ${build_agent_args}
+
 
 
 
@@ -948,7 +1016,7 @@ endeavouros_build_iso_create () {
 	##
 	## ## prepare
 	##
-	endeavouros_build_iso_prepare
+	#endeavouros_build_iso_prepare
 
 
 	##
@@ -960,7 +1028,7 @@ endeavouros_build_iso_create () {
 	##
 	## ## create iso
 	##
-	#endeavouros_build_iso_archive
+	endeavouros_build_iso_archive
 
 
 	return 0
