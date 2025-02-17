@@ -594,6 +594,44 @@ util_dir_file_overlay () {
 
 
 
+##
+## ## Endeavouros / Build ISO / Overlay
+##
+
+endeavouros_build_iso_overlay () {
+
+
+	util_error_echo
+	util_error_echo "##"
+	util_error_echo "## ## Endeavouros / Build ISO / Overlay"
+	util_error_echo "##"
+	util_error_echo
+
+
+	return 0
+
+	endeavouros_factory_build_config_overlay
+
+	endeavouros_factory_master_os_file_overlay
+
+	endeavouros_master_os_file_overlay
+
+	endeavouros_master_os_package_overlay
+
+	#endeavouros_master_os_installer_overlay
+
+	#endeavouros_live_build_config_hook_overlay
+
+
+
+
+	endeavouros_master_os_file_final_adjust
+
+
+	return 0
+}
+
+
 
 
 
@@ -1070,7 +1108,7 @@ endeavouros_build_iso_develop_test_prototype () {
 
 
 
-
+	endeavouros_build_iso_overlay
 
 
 	return 0
